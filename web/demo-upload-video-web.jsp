@@ -35,12 +35,15 @@
       System.out.println(j.toJSONString());
       String upload_url = j.getString("upload_url");
       String progress_url = j.getString("progress_url");
+      String token = j.getString("token");
       
   %>
+      token = <span><%=token%></span>
       <div style="width:100%">
         <form id="form_upload" action="<%=upload_url%>" enctype="multipart/form-data" method="post">
           <input type="file" name="video_file" accept="video/*" />
           <input type="submit" onclick="javascript:doSubmit();" />
+        <a href="demo-resume-upload-web.jsp?token=<%=token%>">续传</a>
         </form>
         <div id="progress" style="height:6px; width:0px; background-color:#007722;"></div>
       <div>

@@ -19,12 +19,9 @@ public class HttpProxy extends HttpServlet
             // url
             String url = inReq.getParameter("url");
             String host = url.split("/")[2];
-            System.out.println(url);
 
             // get
             Request outReq = Request.Get(url);
-
-            System.out.println();
 
             // header
             Enumeration<String> reqHeaders = inReq.getHeaderNames();
@@ -32,12 +29,8 @@ public class HttpProxy extends HttpServlet
             {
                 String key = reqHeaders.nextElement();
                 outReq.setHeader(key, inReq.getHeader(key));
-
-                System.out.println(key+"="+inReq.getHeader(key));
             }
             outReq.setHeader("Host", host);
-
-            System.out.println();
 
             HttpResponse inResp = outReq.execute().returnResponse();
 
@@ -46,8 +39,6 @@ public class HttpProxy extends HttpServlet
             for (int i=0; i<respHeaders.length; i++)
             {
                 outResp.setHeader(respHeaders[i].getName(), respHeaders[i].getValue());
-                System.out.println(respHeaders[i].getName()+"="+respHeaders[i].getValue());
-
             }
 
             // content

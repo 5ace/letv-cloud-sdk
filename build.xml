@@ -12,7 +12,7 @@
   [USAGE]
   Config your project-name right below, then parse it to your project-base. use 'ant -projecthelp' to view all commands.
 -->
-<project name="letv-video-sdk" basedir="." default="build-all" >
+<project name="letv-cloud-sdk" basedir="." default="build-all" >
 
   <!-- 变量 -->
   <property name="srcdir" value="src" />
@@ -22,6 +22,7 @@
   <property name="webinfdir" value="${webdir}/WEB-INF" />
   <property name="rtlibdir" value="${webinfdir}/lib" />
   <property name="destdir" value="${webinfdir}/classes" />
+  <property name="version" value="0.2.0" />
 
   <path id="classpath">
     <fileset id="rt-packages" dir="${rtlibdir}">

@@ -3,33 +3,29 @@ package com.github.cuter44.letv.reqs;
 import java.util.List;
 import java.util.Properties;
 import java.util.Arrays;
-//import java.io.IOException;
 
-//import com.alibaba.fastjson.*;
-
-//import com.github.cuter44.letv.LetvException;
-
-public class VideoUploadInit extends RequestBase
+public class VideoUploadFlash extends RequestBase
 {
     public static final String KEY_CLIENT_IP = "client_id";
-    public static final String KEY_FILE_SIZE = "file_size";
 
     public static final List<String> KEYS_PARAM_NAME = Arrays.asList(
         "api",
         "client_ip",
-        "file_size",
+        "flash_height",
+        "flash_width",
         "format",
+        "js_callback",
         "timestamp",
         "user_unique",
         "ver",
         "video_name"
     );
 
-    public VideoUploadInit(Properties prop)
+    public VideoUploadFlash(Properties prop)
     {
         super(prop);
 
-        this.setProperty(KEY_API, "video.upload.init");
+        this.setProperty(KEY_API, "video.upload.flash");
 
         return;
     }
@@ -38,22 +34,15 @@ public class VideoUploadInit extends RequestBase
     /**
      * build() invoke this method
      */
-    public VideoUploadInit setClientIp(String clientIp)
+    public VideoUploadFlash setClientIp(String clientIp)
     {
         this.setProperty(KEY_CLIENT_IP, clientIp);
 
         return(this);
     }
 
-    public VideoUploadInit setFileSize(int fileSize)
-    {
-        this.setProperty(KEY_FILE_SIZE, String.valueOf(fileSize));
-
-        return(this);
-    }
-
     @Override
-    public VideoUploadInit build()
+    public VideoUploadFlash build()
     {
         super.build();
 
@@ -62,7 +51,7 @@ public class VideoUploadInit extends RequestBase
 
   // SIGN
     @Override
-    public VideoUploadInit sign()
+    public VideoUploadFlash sign()
     {
         this.setProperty(
             KEY_SIGN,

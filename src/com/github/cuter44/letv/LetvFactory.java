@@ -1,6 +1,7 @@
 package com.github.cuter44.letv;
 
 import java.util.Properties;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.MissingResourceException;
 
@@ -53,11 +54,12 @@ public class LetvFactory
             res = res!=null ? res : RESOURCE_LETV_PROPERTIES;
 
             this.conf = new Properties();
+            InputStream is = LetvFactory.class.getResourceAsStream(res);
             this.conf.load(
-                new InputStreamReader(
-                    LetvFactory.class.getResourceAsStream(res),
-                    "utf-8"
-            ));
+                new InputStreamReader(is, "utf-8")
+            );
+
+            is.close();
         }
         catch (Exception ex)
         {
@@ -85,6 +87,38 @@ public class LetvFactory
     {
         return(
             new VideoUploadInit(
+                buildConf(p, this.conf)
+        ));
+    }
+
+    public VideoUploadResume newVideoUploadResume()
+    {
+        return(
+            new VideoUploadResume(
+                new Properties(this.conf)
+        ));
+    }
+
+    public VideoUploadResume newVideoUploadResume(Properties p)
+    {
+        return(
+            new VideoUploadResume(
+                buildConf(p, this.conf)
+        ));
+    }
+
+    public VideoUploadFlash newVideoUploadFlash()
+    {
+        return(
+            new VideoUploadFlash(
+                new Properties(this.conf)
+        ));
+    }
+
+    public VideoUploadFlash newVideoUploadFlash(Properties p)
+    {
+        return(
+            new VideoUploadFlash(
                 buildConf(p, this.conf)
         ));
     }

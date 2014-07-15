@@ -10,8 +10,9 @@ import java.io.IOException;
 import com.alibaba.fastjson.*;
 import static com.github.cuter44.util.crypto.CryptoUtil.MD5Digest;
 import static com.github.cuter44.util.crypto.CryptoUtil.byteToHex;
-import com.github.cuter44.util.string.URLBuilder;
+import com.github.cuter44.util.text.URLBuilder;
 import org.apache.http.client.fluent.*;
+import org.apache.http.*;
 
 import com.github.cuter44.letv.LetvException;
 
@@ -70,7 +71,31 @@ public abstract class RequestBase
     }
 
   // BUILD
-    public abstract RequestBase build();
+    protected RequestBase setTimestamp()
+    {
+        this.setTimestamp(
+            System.currentTimeMillis()/1000
+        );
+
+        return(this);
+    }
+
+    protected RequestBase setTimestamp(long unixTimestamp)
+    {
+        this.setProperty(KEY_TIMESTAMP, String.valueOf(unixTimestamp));
+
+        return(this);
+    }
+
+    /**
+     * must use super.build() in sub-class
+     */
+    public RequestBase build()
+    {
+        this.setTimestamp();
+
+        return(this);
+    }
 
   // SIGN
     /** sign
